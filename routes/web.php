@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PanganController;
+use App\Http\Controllers\AduanController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PasarController;
 use App\Http\Controllers\SatuanController;
@@ -32,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', FrontendController::class);
 Route::get('/komoditas',[FrontendController::class ,'komoditas']);
 Route::get('/komoditas/{nama}',[FrontendController::class ,'showkomoditas']);
-// Route::get('/harga', [FrontendController::class, 'allharga']);
+Route::resource('/aduan-pasar', AduanController::class);
 
 
 

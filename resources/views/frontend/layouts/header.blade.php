@@ -11,6 +11,7 @@
 
                 <li><a class="nav-link scrollto {{ Request::is('/') ? 'active' : '' }}" href="/">Tabel Harga</a></li>
                 <li><a class="nav-link scrollto {{ Request::is('komoditas*') ? 'active' : '' }}" href="/komoditas">Komoditas</a></li>
+                <li><a class="nav-link scrollto {{ Request::is('aduan-pasar*') ? 'active' : '' }}" href="/aduan-pasar">Aduan Pasar</a></li>
                 <li class="dropdown"><a href="#"><span>Website</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">Web Disperdagind</a></li>

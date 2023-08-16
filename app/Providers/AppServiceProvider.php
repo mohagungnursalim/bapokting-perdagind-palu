@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
 
         // dd($site_settings);
         // View::share('settings', $site_settings);
-        // View::share('pasars', Pasar::all());
+        View::share('pasars', Pasar::all());
 
      
         View::share('settings', Setting::latest('created_at')->take(1)->get());

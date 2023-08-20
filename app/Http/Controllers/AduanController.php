@@ -29,7 +29,21 @@ class AduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $validatedData = $request->validate([
+            'nama' => 'required',
+            'no_hp' => 'required',
+            'pasar' => 'required',
+            'gambar' => 'required',
+            'isi_aduan' => 'required'
+        ]);
+
+        if($request->file('gambar')){
+            $validatedData['gambar'] = $request->file('gambar')->store('komoditas-image','public');
+        }
+
+        Aduan::create($validatedData);
+       
+        return redirect('/aduan-pasar')->with('status', 'Aduan telah disampaikan!');
     }
 
     /**

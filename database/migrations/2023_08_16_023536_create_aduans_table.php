@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('aduans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->string('pasar');
+            $table->string('gambar');
+            $table->string('isi_aduan');
             $table->timestamps();
         });
     }

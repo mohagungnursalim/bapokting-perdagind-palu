@@ -42,7 +42,17 @@ Aduan Masuk
                     <th>Lampiran Foto</th>
                     <th>Aduan</th>
                     <th>Tanggal</th>
-                    <th>Aksi</th>
+
+                  @if (Auth::user()->is_admin == true)
+                  @if (Auth::user()->operator == 'hanyalihat')      
+
+                  @else
+                  <th>Aksi</th>
+                  @endif
+                 
+                  @else
+                      
+                  @endif  
                 </tr>
                 @foreach ($aduans as $aduan )
                 <tr>
@@ -55,16 +65,19 @@ Aduan Masuk
                     </td>
                     <td>{{ $aduan->isi_aduan }}</td>
                     <td>{{ Carbon\Carbon::parse($aduan->created_at)->format('d/m/Y') }}</td>
-                    <td>
-                       
+
+                    @if (Auth::user()->is_admin == true)
+                    @if (Auth::user()->operator == 'hanyalihat')        
+                    @else
+                    <td>                     
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                             data-target="#exampleModaldelete{{ $aduan->id }}">
                             <i class="fas fa-fw fa-trash"></i>
-                        </button>
-                        
+                        </button>         
                     </td>
-                    
-                    
+                    @endif
+                    @else
+                    @endif
                 </tr>
                 @endforeach
 

@@ -20,16 +20,36 @@
 
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            Jenis Barang</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $barang }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-pepper-hot fa-2x text-gray-300"></i>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Jenis Barang</div>
+                            Harga Barang Di Input</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pangan }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-chart-bar fa-2x text-gray-300"></i>
+                        
                     </div>
                 </div>
             </div>
@@ -215,11 +235,13 @@
   
       var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
-        ['Jenis Barang',     {{ $pangan }}],
-        ['Komoditas',      {{ $komoditas }}],
+        ['Jenis Barang', {{ $barang }}],
+        ['Harga Barang Di Input',  {{ $pangan }}],
+        ['Komoditas',  {{ $komoditas }}],
         ['Akun',  {{ $user }}],
         ['Pasar', {{ $pasar }}],
-        ['Satuan', {{ $satuan }}]
+        ['Satuan', {{ $satuan }}],
+        
       ]);
   
       var options = {
@@ -228,6 +250,7 @@
         title: 'Sebaran Data',
         is3D:true,
         colors: [
+          '#f44336',
           '#0275d8', 
           '#5cb85c', 
           '#5bc0de',
@@ -250,7 +273,8 @@
   
       var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
-        ['Jenis Barang',     {{ $pangan }}],
+        ['Jenis Barang', {{ $barang }}]
+        ['Harga Barang Di Input',     {{ $pangan }}],
         ['Komoditas',      {{ $komoditas }}],
         ['Satuan', {{ $satuan }}]
       ]);

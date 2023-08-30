@@ -255,17 +255,20 @@ class PanganController extends Controller
         
         $satuan = Satuan::all()->count();
 
+        $barang = Barang::all()->count();
         
         $pasar = Pasar::all()->count();
         
-        return view('dashboard.dashboard',[
-            'pangan' => $pangan,
-            'komoditas' => $komoditas,
-            'user' => $user,
-            'pasar' => $pasar,
-            'satuan' => $satuan
-        ]);
+        // return view('dashboard.dashboard',[
+        //     'pangan' => $pangan,
+        //     'komoditas' => $komoditas,
+        //     'user' => $user,
+        //     'pasar' => $pasar,
+        //     'satuan' => $satuan,
+        //     'barang'
+        // ]);
 
+        return view('dashboard.dashboard',compact('pangan','komoditas','user','pasar','satuan','barang'));
     }
 
     public function export(Request $request, Pangan $pangan)

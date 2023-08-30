@@ -59,9 +59,15 @@
     </li>
 
     <hr class="sidebar-divider">
-     
+    <li class="nav-item {{ Request::is('dashboard/aduan-masuk*') ? 'active' : '' }}">
+        <a class="nav-link" href="/dashboard/aduan-masuk">
+            <i class="fas fa-fw fa-envelope"></i>
+            <span>Aduan Masyarakat</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
     <li class="nav-item {{ Request::is('profile') ? 'active' : '' }}">
-        <a class="nav-link" href="/profile">
+        <a class="nav-link" href="/dashboard/profile">
             <i class="fas fa-fw fa-user-edit"></i>
             <span>Edit Profil</span></a>
     </li>

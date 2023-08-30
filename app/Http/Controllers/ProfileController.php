@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $request->user()->save();
 
         $request->session(Alert::success('success', 'Profil berhasil diubah!'));
-        return redirect('/profile');
+        return redirect('/dashboard/profile');
     }
 
     /**

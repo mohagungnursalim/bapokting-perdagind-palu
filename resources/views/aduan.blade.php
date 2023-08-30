@@ -18,6 +18,7 @@ Aduan Pasar
     <section id="aduan" class="aduan">
 
         <div class="container">
+            {{-- success message --}}
             @if ($message = Session::get('status'))
 
                 <div class="alert alert-success d-flex align-items-center" role="alert">
@@ -27,12 +28,25 @@ Aduan Pasar
                      {{ $message }}
                     </div>
                   </div>
-                @endif
+            @endif
+            {{-- error message --}}
+            @if ($errors->any())
+
+                <div class="alert alert-danger d-flex align-items-center" id="alert-error" role="alert">
+                    {{-- icon --}}
+                   
+                    <div>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                  </div>
+            @endif
             <div class="d-flex justify-content-center">
                 
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('aduan-pasar.store') }}" method="post">
+                        <form action="{{ route('aduan-pasar.store') }}" method="post" enctype="multipart/form-data">
 
                             @csrf
                             <div class="mb-2 row">
@@ -40,12 +54,18 @@ Aduan Pasar
                                 <div class="col">
                                     <input type="text" name="nama" autofocus class="form-control-plaintext"
                                         placeholder="Masukan Nama Lengkap..">
+                                        @error('nama')
+                                            <small><p class="text-danger">{{ $message }}</p></small>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="mb-2 row">
                                 <label for="staticEmail" class=""><b>No.Hp/Wa</b></label>
                                 <div class="col">
                                     <input type="text" name="no_hp" autofocus class="form-control-plaintext" placeholder="Masukan No.Hp/Wa..">
+                                    @error('no_hp')
+                                            <small><p class="text-danger">{{ $message }}</p></small>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="mb-2 row">
@@ -58,6 +78,9 @@ Aduan Pasar
                                         @endforeach
             
                                     </select>
+                                    @error('pasar')
+                                            <small><p class="text-danger">{{ $message }}</p></small>
+                                        @enderror
                                 </div>
             
                             </div>
@@ -65,6 +88,9 @@ Aduan Pasar
                                 <label for="staticEmail" class=""><b>Lampiran Foto</b></label>
                                 <div class="col">
                                     <input class="form-control" name="gambar" type="file">
+                                    @error('gambar')
+                                            <small><p class="text-danger">{{ $message }}</p></small>
+                                        @enderror
                                 </div>
             
                             </div>
@@ -73,6 +99,9 @@ Aduan Pasar
                                 <div class="col">
                                     <textarea name="isi_aduan" class="form-control" id="" cols="30" rows="5"
                                         placeholder="Masukan Aduan Anda.."></textarea>
+                                        @error('isi_aduan')
+                                            <small><p class="text-danger">{{ $message }}</p></small>
+                                        @enderror
                                 </div>
                             </div>
             

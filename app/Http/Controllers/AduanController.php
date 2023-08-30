@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Aduan;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use App\Exports\AduanExport;
+use Alert;
+use Maatwebsite\Excel\Facades\Excel;
 class AduanController extends Controller
 {
     /**
@@ -12,8 +15,33 @@ class AduanController extends Controller
      */
     public function index()
     {
+
+        
         
         return view('aduan');
+    }
+
+    // dashboard index aduan
+    public function aduan()
+    {
+
+        if (auth()->user()->is_admin == true) {
+            $aduans = Aduan::latest()->paginate(20);
+        }else {
+            
+            $aduans = Aduan::where('pasar', auth()->user()->operator)->latest()->paginate(20);
+        }
+
+        // $aduans = Aduan::paginate(20);
+
+        // if (request('search')) {
+        //     $aduans = Aduan::where('nama', 'like', '%' . request('search') . '%')->
+        //                      orWhere('no_hp', 'like', '%' . request('search') . '%')->
+        //                      orWhere('pasar', 'like', '%' . request('search') . '%')->
+        //                      orWhere('isi_aduan', 'like', '%' . request('search') . '%')->
+        //     latest()->paginate(20);
+        // } 
+        return view('dashboard.aduan.index',compact('aduans'));
     }
 
     /**
@@ -38,11 +66,10 @@ class AduanController extends Controller
         ]);
 
         if($request->file('gambar')){
-            $validatedData['gambar'] = $request->file('gambar')->store('komoditas-image','public');
+            $validatedData['gambar'] = $request->file('gambar')->store('aduan-image','public');
         }
 
         Aduan::create($validatedData);
-       
         return redirect('/aduan-pasar')->with('status', 'Aduan telah disampaikan!');
     }
 
@@ -73,8 +100,29 @@ class AduanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aduan $aduan)
+    public function destroy(Aduan $aduan,Request $request,$id)
     {
-        //
+        $aduan = Aduan::find($id);
+
+        
+        $aduan->delete();
+
+        $request->session(Alert::success('success', 'Aduan berhasil dihapus!'));
+            return redirect('/dashboard/aduan-masuk');
+    }
+
+    public function export(Request $request, Aduan $aduan)
+    {
+        
+        if (request('periode')) {
+            $aduan = Aduan::where('created_at', 'like', '%' . request('periode') . '%')->get();
+
+            return Excel::download(new AduanExport($aduan), 'Aduan Masyarakat.xlsx');
+       
+        }
+    
+    
+        return Excel::download(new AduanExport(), 'Aduan Masyarakat.xlsx');
+        
     }
 }

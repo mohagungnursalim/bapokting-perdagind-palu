@@ -42,10 +42,10 @@ Route::resource('/aduan-pasar', AduanController::class);
 
 // ________________Dashboard admin & Operator__________________
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'index']);
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/dashboard/profile', [ProfileController::class, 'index']);
+    Route::patch('/dashboard/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/dashboard/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('/dashboard', [PanganController::class, 'dashboard'])->middleware('auth','verified');
@@ -55,11 +55,12 @@ Route::resource('/dashboard/barang', BarangController::class)->middleware('admin
 Route::resource('/dashboard/pasar', PasarController::class)->middleware('auth');
 Route::resource('/dashboard/satuan', SatuanController::class)->middleware('admin','auth');
 Route::resource('/dashboard/buat-akun', UserController::class)->middleware('admin','auth');
-// download export excel
-Route::get('/export',[PanganController::class ,'export'])->middleware('auth')->name('exportByDate');
+Route::get('/dashboard/aduan-masuk', [AduanController::class, 'aduan'])->middleware('auth');
+// download export excel data harga
+Route::get('/export',[PanganController::class ,'export'])->middleware('auth');
 
-// update keterangan
-// Route::put('/dashboard/master-data/keterangan/{pangan:id}' ,[PanganController::class,'updateketerangan'])->middleware('auth')->name('updateketerangan');
+// download export excel data aduan
+Route::get('/export-aduan',[AduanController::class , 'export'])->middleware('admin','auth');
 
 // settings app resource
 Route::resource('/dashboard/setting-app', SettingController::class)->middleware('auth');

@@ -15,16 +15,12 @@ Tabel Harga
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <div class="container">
             <h6 class="m-0 font-weight-bold text-dark">DATA HARGA BAHAN KEBUTUHAN POKOK
-                TAHUN <kbd class="bg-primary">@php echo date('Y') @endphp</kbd></h6>
+                </h6>
         </div>
 
 
     </div>
-    @if($errors->any())
-    <div class="alert alert-danger">
-        Terdapat {{ $errors }} error pada validasi.
-    </div>
-@endif
+   
     <div class="card-body">
 
         <div class="container">
@@ -494,7 +490,7 @@ Tabel Harga
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-dark" id="exampleModalLabel">Delete Data</h5>
+                <h5 class="modal-title text-dark" id="exampleModalLabel">Delete Data <kbd>{{ $pangan->jenis_barang }} | {{ $pangan->periode->format('d/m/Y') }}</kbd></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

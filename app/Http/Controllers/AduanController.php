@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Exports\AduanExport;
 use Alert;
 use Maatwebsite\Excel\Facades\Excel;
@@ -34,13 +35,44 @@ class AduanController extends Controller
 
         // $aduans = Aduan::paginate(20);
 
-        // if (request('search')) {
-        //     $aduans = Aduan::where('nama', 'like', '%' . request('search') . '%')->
-        //                      orWhere('no_hp', 'like', '%' . request('search') . '%')->
-        //                      orWhere('pasar', 'like', '%' . request('search') . '%')->
-        //                      orWhere('isi_aduan', 'like', '%' . request('search') . '%')->
-        //     latest()->paginate(20);
-        // } 
+        if (auth()->user()->is_admin == true) {
+            if (request('search')) {
+                $aduans = Aduan::where('nama', 'like', '%' . request('search') . '%')->
+                                 orWhere('no_hp', 'like', '%' . request('search') . '%')->
+                                 orWhere('pasar', 'like', '%' . request('search') . '%')->
+                                 orWhere('isi_aduan', 'like', '%' . request('search') . '%')->
+                                 
+                latest()->paginate(20);
+                
+            } 
+        }elseif (auth()->user()->is_admin == false) {
+
+            // if (request('search')) {
+
+            //     $aduans = Aduan::where('nama', 'like', '%' . request('search') . '%')->where('pasar', Auth::user()->operator)->                           
+            //                      orWhere('no_hp', 'like', '%' . request('search') . '%')->
+            //                      orWhere('isi_aduan', 'like', '%' . request('search') . '%')->
+            //                      orWhere('pasar', 'like', '%' . request('search') . '%')->                           
+            //     latest()->paginate(20);
+                
+            if (request('search')) {
+                $aduans = Aduan::where(function ($query) {
+                    $query->where(function ($subquery) {
+                        $subquery->where('nama', 'like', '%' . request('search') . '%')
+                                 ->orWhere('no_hp', 'like', '%' . request('search') . '%')
+                                 ->orWhere('isi_aduan', 'like', '%' . request('search') . '%');
+                    })
+                    ->where(function ($subquery) {
+                        $subquery->where('pasar', Auth::user()->operator)
+                                 ->orWhere('pasar', 'like', '%' . request('search') . '%');
+                    });
+                })->latest()->paginate(20);
+            }
+        }
+
+       
+
+
         return view('dashboard.aduan.index',compact('aduans'));
     }
 

@@ -46,15 +46,7 @@ class AduanController extends Controller
                 
             } 
         }elseif (auth()->user()->is_admin == false) {
-
-            // if (request('search')) {
-
-            //     $aduans = Aduan::where('nama', 'like', '%' . request('search') . '%')->where('pasar', Auth::user()->operator)->                           
-            //                      orWhere('no_hp', 'like', '%' . request('search') . '%')->
-            //                      orWhere('isi_aduan', 'like', '%' . request('search') . '%')->
-            //                      orWhere('pasar', 'like', '%' . request('search') . '%')->                           
-            //     latest()->paginate(20);
-                
+      
             if (request('search')) {
                 $aduans = Aduan::where(function ($query) {
                     $query->where(function ($subquery) {
@@ -146,12 +138,16 @@ class AduanController extends Controller
     public function export(Request $request, Aduan $aduan)
     {
         
-        if (request('periode')) {
-            $aduan = Aduan::where('created_at', 'like', '%' . request('periode') . '%')->get();
-
-            return Excel::download(new AduanExport($aduan), 'Aduan Masyarakat.xlsx');
-       
+        if (Auth::user()->is_admin == true) {
+            
+                $aduan = Aduan::latest()->get();
+                return Excel::download(new AduanExport($aduan), 'Aduan Masyarakat.xlsx');
+           
+        }elseif (Auth::user()->is_admin == false) {
+                $aduan = Aduan::where('pasar',Auth::user()->operator)->latest();
+                return Excel::download(new AduanExport($aduan), 'Aduan Masyarakat.xlsx');
         }
+       
     
     
         return Excel::download(new AduanExport(), 'Aduan Masyarakat.xlsx');

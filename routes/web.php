@@ -60,7 +60,7 @@ Route::get('/dashboard/aduan-masuk', [AduanController::class, 'aduan'])->middlew
 Route::get('/export',[PanganController::class ,'export'])->middleware('auth');
 
 // download export excel data aduan
-Route::get('/export-aduan',[AduanController::class , 'export'])->middleware('admin','auth');
+Route::get('/export-aduan',[AduanController::class , 'export'])->middleware('auth');
 
 // settings app resource
 Route::resource('/dashboard/setting-app', SettingController::class)->middleware('auth');

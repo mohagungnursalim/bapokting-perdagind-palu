@@ -74,7 +74,7 @@ Kelola Akun
 
         <div class="container">
 
-            <form class="form-inline" action="/dashboard/satuan">
+            <form class="form-inline" action="/dashboard/buat-akun">
                 <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
                     aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -132,7 +132,12 @@ Kelola Akun
                     @endforeach
                     @else
                         <tr>
-                            <td colspan="7" class="text-center">Tidak ada user</td>
+                            <td colspan="7" class="text-center">
+                                Tidak ada user 
+                                @if (request('search'))
+                                <kbd>{{ request('search') }}</kbd>                
+                                @endif
+                            </td>
                         </tr>
                     @endif
                 </table>

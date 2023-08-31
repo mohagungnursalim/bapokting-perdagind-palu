@@ -21,12 +21,18 @@ class AduanExport implements FromQuery, WithMapping, ShouldAutoSize, WithHeading
     
     public function query()
     {
-        if (request('periode')) {
-            return Aduan::query()->where('created_at','like', '%' . request('periode') . '%')->orderBy('created_at', 'desc');
-        } 
+        // if (request('periode')) {
+        //     return Aduan::query()->where('created_at','like', '%' . request('periode') . '%')->orderBy('created_at', 'desc');
+        // } 
 
-    // return Aduan::query()->where('user_id', auth()->user()->id)->orderBy('periode', 'desc');
-         return Aduan::query();
+        if (auth()->user()->is_admin == true) {
+            return Aduan::query()->orderBy('created_at', 'desc');
+        }elseif (auth()->user()->is_admin == false) {
+            return Aduan::query()->where('pasar', auth()->user()->operator)->orderBy('created_at', 'desc');
+           
+        }
+       
+        //  return Aduan::query();
     }    
 
     public function headings(): array

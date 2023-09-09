@@ -85,7 +85,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SIBAPOKTING | LOGIN</title>
+    <title> @foreach ($settings as $setting )
+        {{ $setting->nama }}
+        @endforeach | Konfirmasi Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

@@ -62,7 +62,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SIBAPOKTING | REGISTRASI</title>
+    <title> @foreach ($settings as $setting )
+        {{ $setting->nama }}
+        @endforeach| Registrasi</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

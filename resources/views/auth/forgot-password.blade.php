@@ -36,7 +36,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SIBAPOKTING | Lupa Password</title>
+    <title> @foreach ($settings as $setting )
+        {{ $setting->nama }}
+        @endforeach | Lupa Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -71,6 +73,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Lupa Password</h1>
+                                        <p>Masukan Email yang telah terdaftar sebelumnya pada sistem,lalu cek link reset password yang kami kirimkan ke email anda.Kemudian cek pada kotak masuk atau spam. </p>
                                     </div>
                                     <form method="POST" action="{{ route('password.email') }}">
                                         @csrf
@@ -92,7 +95,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Lupa Password?</a>
+                                        <a class="small" href="/login">Login?</a>
                                     </div>
                                     
                                 </div>

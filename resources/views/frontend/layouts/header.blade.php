@@ -3,7 +3,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
         <div class="logo">
-            <a href="index.html"><img src="{{ asset('img/bapokting.png') }}" alt="" class="img-fluid"></a>
+            <a href="index.html"><img src="{{ asset('img/simpah.png') }}" alt="" class="img-fluid"></a>
         </div>
 
         <nav id="navbar" class="navbar">

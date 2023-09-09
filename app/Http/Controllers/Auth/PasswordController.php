@@ -26,6 +26,6 @@ class PasswordController extends Controller
         ]);
 
         $request->session(Alert::success('success', 'Password berhasil diubah!'));
-        return redirect('/profile');
+        return redirect('/dashboard/profile');
     }
 }

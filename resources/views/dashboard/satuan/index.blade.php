@@ -38,7 +38,7 @@ Satuan
                     <th>No</th>
                     <th>Satuan</th>
                     <th>Dibuat</th>
-                    @if (auth()->user()->operator == 'hanyalihat'))
+                    @if (auth()->user()->operator == 'hanyalihat')
                         
                     @else
                     <th>Aksi</th>

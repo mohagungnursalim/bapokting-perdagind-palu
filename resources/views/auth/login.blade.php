@@ -8,7 +8,8 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -16,10 +17,8 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -27,16 +26,18 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <input id="remember_me" type="checkbox"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
                 <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
             @endif
 
             <x-primary-button class="ml-3">
@@ -57,7 +58,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LOGIN</title>
+    <title>SIBAPOKTING | LOGIN</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -87,34 +88,40 @@
                                 <img src="{{ asset('img/kotapalu.png') }}" width="130px" alt="">
                                 <h1 class="h4 text-dark">Dinas Perdagangan dan Perindustrian Kota Palu</h1>
                             </div>
-                            
+
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
                                     </div>
+                                    @if(session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                    @endif
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" name="email" 
-                                                placeholder="Enter Email Address..." value="{{ old('email') }}">
+                                                id="exampleInputEmail" name="email" placeholder="Enter Email Address..."
+                                                value="{{ old('email') }}">
 
-                                                @error('email')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                            @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" name="password"  placeholder="Password">
+                                                id="exampleInputPassword" name="password" placeholder="Password">
 
-                                                @error('password')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                            @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                    name="remember">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
@@ -122,14 +129,14 @@
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-                                        
-                                        
+
+
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Lupa Password?</a>
+                                        <a class="small" href="/forgot-password">Lupa Password?</a>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

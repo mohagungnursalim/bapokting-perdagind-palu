@@ -66,7 +66,7 @@
     </li>
     <hr class="sidebar-divider">
 
-    <li class="nav-item {{ Request::is('profile') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('dashboard/profile') ? 'active' : '' }}">
         <a class="nav-link" href="/dashboard/profile">
             <i class="fas fa-fw fa-user-edit"></i>
             <span>Edit Profil</span></a>
@@ -86,7 +86,6 @@
             <span>Setting App</span></a>
     </li> 
     @endif
-    
     @endcan
     
 

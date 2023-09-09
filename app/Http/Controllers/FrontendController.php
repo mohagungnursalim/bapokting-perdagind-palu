@@ -102,14 +102,14 @@ class FrontendController extends Controller
 
        
 
-        $now = Carbon::now()->subDay()->toDateString();
+        // $now = Carbon::now()->subDay()->toDateString();
 
         $komoditas = Komoditas::where('nama', $nama)->first();
         $pasars = Pasar::latest()->get();
-        $pangans = Pangan::where('komoditas', $nama)->where('periode',$now)->latest()->paginate(5)->withQueryString();
+        $pangans = Pangan::where('komoditas', $nama)->latest()->paginate(5)->withQueryString();
 
         if (request('pasar')){
-            $pangans =  Pangan::where('pasar', 'like', '%' . request('pasar') . '%')->where('komoditas', $nama)->where('periode',$now)->latest()->paginate(5)->withQueryString();
+            $pangans =  Pangan::where('pasar', 'like', '%' . request('pasar') . '%')->where('komoditas', $nama)->latest()->paginate(5)->withQueryString();
         }
 
         

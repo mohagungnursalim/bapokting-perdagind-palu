@@ -237,10 +237,11 @@
         ['Task', 'Hours per Day'],
         ['Jenis Barang', {{ $barang }}],
         ['Harga Barang Di Input',  {{ $pangan }}],
+        ['Satuan', {{ $satuan }}],
         ['Komoditas',  {{ $komoditas }}],
         ['Akun',  {{ $user }}],
         ['Pasar', {{ $pasar }}],
-        ['Satuan', {{ $satuan }}],
+        
         
       ]);
   
@@ -252,10 +253,11 @@
         colors: [
           '#f44336',
           '#0275d8', 
+          '#FFC107',
           '#5cb85c', 
           '#5bc0de',
           '#000000',
-          '#FFC107'
+          
       ]
       };
   
@@ -265,7 +267,7 @@
     }
   </script>
 @else
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
   
@@ -287,7 +289,43 @@
         colors: [
           '#0275d8', 
           '#5cb85c', 
+          '#5cb85c',
           '#FFC107'
+      ]
+      };
+  
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  
+      chart.draw(data, options);
+    }
+</script> --}}
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+  
+    function drawChart() {
+  
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Jenis Barang', {{ $barang }}],
+        ['Harga Barang Di Input',  {{ $pangan }}],
+        ['Satuan', {{ $satuan }}],
+        ['Komoditas',  {{ $komoditas }}],
+        
+        
+      ]);
+  
+      var options = {
+      width:400,
+        height:200,
+        title: 'Sebaran Data',
+        is3D:true,
+        colors: [
+          '#f44336',
+          '#0275d8', 
+          '#FFC107',
+          '#5cb85c'
+          
       ]
       };
   
